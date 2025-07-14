@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Repo Activity</title>
+  <meta http-equiv="refresh" content="15">
+  <style>
+    body { font-family: Arial; padding: 20px; background: #f4f4f4; }
+    .event { background: white; padding: 10px; margin-bottom: 10px; border-radius: 6px; }
+  </style>
+</head>
+<body>
+  <h2>Latest Repo Activity</h2>
+  <div id="events"></div>
+
+  <script>
+    async function loadEvents() {
+      const res = await fetch("/events");
+      const events = await res.json();
+      document.getElementById("events").innerHTML = events.map(e => `<div class="event">${e}</div>`).join("");
+    }
+
+    loadEvents();
+    setInterval(loadEvents, 15000);
+  </script>
+</body>
+</html>
